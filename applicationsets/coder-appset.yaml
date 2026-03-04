@@ -2,14 +2,15 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: coder
-  namespace: argocd
+  namespace: argocd-poc
 
 spec:
   generators:
     - list:
         elements:
-          - name: coder
-            namespace: coder
+          - name: coder-1
+            namespace: argocd-poc
+            server: https://kubernetes.default.svc
 
   template:
     metadata:
@@ -19,17 +20,22 @@ spec:
       project: default
 
       source:
-        repoURL: https://helm.coder.com/v2
-        chart: coder
-        targetRevision: 2.29.5
+        repoURL: https://github.com/manojchappidi/coder-argocd.git
+        targetRevision: main
+        path: coder
+        helm:
+          valueFiles:
+            - values.yaml
 
       destination:
-        server: https://kubernetes.default.svc
+        server: '{{server}}'
         namespace: '{{namespace}}'
 
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
+
         syncOptions:
           - CreateNamespace=true
+          - ServerSideApply=true
