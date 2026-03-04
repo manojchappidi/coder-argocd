@@ -47,10 +47,10 @@ coder:
 postgresql:
   enabled: false
 
-externalDatabase:
-  host: postgres.argocd-poc.svc.cluster.local
-  port: 5432
-  user: postgres
-  database: coder
-  existingSecret: coder-postgresql-secret
-  existingSecretKey: postgres-password
+#externalDatabase:
+ # host: postgres.argocd-poc.svc.cluster.local
+ # port: 5432
+  #user: postgres
+  #database: coder
+  #existingSecret: coder-postgresql-secret
+  #existingSecretKey: postgres-password
