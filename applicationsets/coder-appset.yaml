@@ -19,13 +19,19 @@ spec:
     spec:
       project: default
 
-      source:
-        repoURL: https://github.com/manojchappidi/coder-argocd.git
-        targetRevision: main
-        path: coder
-        helm:
-          valueFiles:
-            - values.yaml
+      sources:
+        # Helm chart source
+        - repoURL: https://helm.coder.com/v2
+          chart: coder
+          targetRevision: 2.29.5
+          helm:
+            valueFiles:
+              - $values/coder/values.yaml
+
+        # Git repo containing values.yaml
+        - repoURL: https://github.com/manojchappidi/coder-argocd.git
+          targetRevision: main
+          ref: values
 
       destination:
         server: '{{server}}'
