@@ -8,18 +8,25 @@ coder:
 
   service:
     type: ClusterIP
+    port: 8080
 
   ingress:
     enabled: true
     className: nginx
-
     hosts:
       - host: coder.example.com
         paths:
           - path: /
             pathType: Prefix
-
     tls: []
+
+  resources:
+    requests:
+      cpu: 200m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
 
 postgresql:
   enabled: false
