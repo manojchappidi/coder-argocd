@@ -26,7 +26,7 @@ coder:
       memory: 128Mi
     limits:
       cpu: 300m
-      memory: 256Mi
+      memory: 1Gi
 
   livenessProbe:
     httpGet:
