@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: coder
-  namespace: argocd-poc
+  namespace: argocd
 
 spec:
   generators:
@@ -20,7 +20,6 @@ spec:
       project: default
 
       sources:
-        # Helm chart source
         - repoURL: https://helm.coder.com/v2
           chart: coder
           targetRevision: 2.29.5
@@ -28,7 +27,6 @@ spec:
             valueFiles:
               - $values/coder/values.yaml
 
-        # Git repo containing values.yaml
         - repoURL: https://github.com/manojchappidi/coder-argocd.git
           targetRevision: main
           ref: values
